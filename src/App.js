@@ -3,6 +3,7 @@ import{ BrowserRouter ,Switch, Route, Redirect} from 'react-router-dom';
 // Components
 import ProductsList from "./Components/ProductsList";
 import ProductDetail from "./Components/ProductDetail";
+import Profile from "./Components/Profile"
 
 function App() {
   console.log("app")
@@ -11,17 +12,20 @@ function App() {
     <div >
        {/* <ProductDetail /> */}
        {/* <ProductsList />  */}
-         {/* <BrowserRouter> */}
+         {/* <Profile/> */}
      
      <Switch>
-      <Route path="/detail/:productID">
+      <Route path="/products/:productID">
             <ProductDetail />
           </Route>  
-          <Route path="/list/">  
+          <Route path="/products/">  
             <ProductsList />
-          </Route>     
+          </Route> 
+          <Route path="/profile">
+            <Profile/>
+            </Route>    
           </Switch>
-        {/* </BrowserRouter>   */}
+       
     </div>
   );
 }

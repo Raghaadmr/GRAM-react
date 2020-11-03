@@ -4,29 +4,33 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
 
-
-
-
-
 const ProductDetail = ({ products }) => {
     console.log("detail page")
   const { productID } = useParams();
   console.log(productID)
   const product = products.find((product) => product.id === +productID);
-  if (!product) return <Redirect to="/list/" />;
+  if (!product) return <Redirect to="/products/" />;
   console.log(product)
 
+//display list of image product 
+  const productImage = product.images.map(image => (
+    <div className="image">
+    <img src={image}  />
+    </div> 
+));
+
+
   return (
-    <div className="container mt-5">
+    <div className="container mt-5" key={productID} >
       <div className="card">
       <div className="card-header">
         Product Detail
       </div>
          <div className="image">
-        <img src={product.img} alt={product.name} />
+        <img src={product.image} alt={product.name} />
         </div> 
         <div className="card-body">
-
+     
           <h5 className="card-title">
             {product.name}
           </h5>
@@ -35,7 +39,7 @@ const ProductDetail = ({ products }) => {
           <p>stock : {product.stock}</p>
           <p>Price : {product.price} SAR</p>
          
-          
+          {productImage}
         </div>
     </div>   
     </div>

@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 
 const ProductsList = ({ products })=> {
     const [query, setQuery] = useState("");
-console.log(products)
+//console.log(products)
 console.log("products")
 
 
