@@ -1,20 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
+import Logout from "../Logout";
 
-const Profile = () => {
-//let user =user.username
-let user ="ghadeer"
-//  {user.username} , <Logout /> in return 
-    return (<div>
-   {user}
+const Profile = ({ user }) => {
+  return (
+    <div>
+      <div className="container mt-5">
+        <div className="card">
+          <div className="card-header">Profile</div>
+
+          <div className="card-body">
+            <p>username: {/* {user.username} */}</p>
+            <p>email : {/* {user.email} */}</p>
+
+            <br />
+            <div>
+              <Logout />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-     
-    );
-  };
-  
+  );
+};
 
-  export default Profile
- // const mapStateToProps = ({user}) => ({user});
-  
- // export default connect(mapStateToProps)(Navbar)
+const mapStateToProps = ({ user }) => ({ user });
+
+export default connect(mapStateToProps)(Profile);
