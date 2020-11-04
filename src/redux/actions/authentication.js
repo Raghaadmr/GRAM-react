@@ -10,6 +10,7 @@ export const signup = (userData) => {
     try {
       const res = await instance.post("api/v1/signup/", userData);
       const { token } = res.data;
+      console.log(token);
       dispatch(resetErrors());
       dispatch(setCurrentUser(token));
       dispatch(fetchProducts());
@@ -26,11 +27,28 @@ export const login = (userData) => {
   return async (dispatch) => {
     try {
       const res = await instance.post("/api/v1/login/", userData);
-      const { token } = res.data;
-      console.log(token);
+      const { access } = res.data;
+
+      //console.log(res.data);
       dispatch(resetErrors());
-      dispatch(setCurrentUser(token));
+      dispatch(setCurrentUser(access));
       dispatch(fetchProducts());
+    } catch (err) {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
+    }
+  };
+};
+export const userProfile = (user_id) => {
+  return async (dispatch) => {
+    try {
+      if (user_id) {
+        const res = await instance.get("/api/v1/" + { user_id } + "/profile/");
+        const user = res.data;
+        return user;
+      }
     } catch (err) {
       dispatch({
         type: SET_ERRORS,
@@ -52,12 +70,18 @@ const setAuthToken = (token) => {
 
 const setCurrentUser = (token) => {
   setAuthToken(token);
-  const user = token ? decode(token) : null;
+  let user = token ? decode(token) : null;
+  if (user) {
+    user = userProfile(user.user_id);
+    console.log(user, "FROM USER PROFILE");
+  }
+
   return {
     type: SET_CURRENT_USER,
     payload: user,
   };
 };
+
 export const logout = () => setCurrentUser();
 
 export const checkForExpiredToken = () => {
