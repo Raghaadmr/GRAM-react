@@ -6,10 +6,6 @@ import { logout } from "./redux/actions";
 const NavBar = ({ user, logout }) => (
   <div className="container">
     <div className="fixed-top">
-      <Link to="/products/" className="btn btn-danger m-2 float-center">
-        products
-      </Link>
-
       {user ? (
         <div>
           <Link to="/profile/" className="btn btn-danger m-2 float-center">

@@ -10,8 +10,8 @@ const Profile = ({ user }) => {
           <div className="card-header">Profile</div>
 
           <div className="card-body">
-            <p>username: {/* {user.username} */}</p>
-            <p>email : {/* {user.email} */}</p>
+            <p>username: {user.username}</p>
+            <p>email : {user.email}</p>
 
             <br />
             <div>
