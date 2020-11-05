@@ -12,9 +12,6 @@ export const signup = (userData) => {
       const { token } = res.data;
       dispatch(resetErrors());
       dispatch(setCurrentUser(token));
-      // redundunt
-      // dispatch(fetchProducts());
-      //
     } catch (err) {
       dispatch({
         type: SET_ERRORS,
@@ -32,9 +29,6 @@ export const login = (userData) => {
       console.log(access);
       dispatch(resetErrors());
       dispatch(setCurrentUser(access));
-      //redundunt
-      // dispatch(fetchProducts());
-      //
     } catch (err) {
       dispatch({
         type: SET_ERRORS,
