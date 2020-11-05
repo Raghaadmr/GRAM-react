@@ -1,26 +1,32 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+
+import {  Switch, Route, Redirect } from "react-router-dom";
+
 // Components
 import ProductsList from "./Components/ProductsList";
 import ProductDetail from "./Components/ProductDetail";
+import Profile from "./Components/Profile";
+import Login from "./Login";
+import Signup from "./Signup";
+import NavBar from "./NavBar";
 import OrderList from "./Components/OrderList";
 import OrderDetail from "./Components/OrderDetail";
 
+
 function App() {
-  console.log("app")
-
   return (
-    <div >
-      {/* <ProductDetail /> */}
-      {/* <ProductsList />  */}
-      {/* <BrowserRouter> */}
 
+    <div>
+      <NavBar />
       <Switch>
-        <Route path="/detail/:productID">
+        <Route path="/products/:productID">
           <ProductDetail />
         </Route>
-        <Route path="/list/">
+        <Route path="/products/">
           <ProductsList />
+        </Route>
+        <Route path="/profile">
+          <Profile />
         </Route>
         <Route path="/orders/:orderID">
           <OrderDetail />
@@ -28,8 +34,14 @@ function App() {
         <Route path="/orders/">
           <OrderList />
         </Route>
+        <Redirect exact from="/logout" to="/login" />
+        <Route path="/signup">
+          <Signup />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
       </Switch>
-      {/* </BrowserRouter>   */}
     </div>
   );
 }
