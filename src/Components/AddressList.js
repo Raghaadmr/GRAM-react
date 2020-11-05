@@ -1,12 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import AddressCard from "./AddressCard";
+import { Redirect } from "react-router-dom"
 
-const AddressList = ({ addresses }) => {
+const AddressList = ({ addresses, user }) => {
     // send one item from list to display in card 
     const addressCard = addresses.map(address => (
         <AddressCard key={address.id} address={address} />
     ));
+
+    if(!user) return <Redirect to="login/"/>
 
     return (
         <div className="container" style={{ textAlign: "center" }}>
@@ -19,8 +22,9 @@ const AddressList = ({ addresses }) => {
         </div>
     );
 }
-const mapStateToProps = ({ addresses }) => ({
-    addresses
+const mapStateToProps = ({ addresses, user }) => ({
+    addresses,
+    user
 });
 
 export default connect(mapStateToProps)(AddressList);

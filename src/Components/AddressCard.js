@@ -8,12 +8,12 @@ const AddressCard = ({ address }) => {
                 <h5 className="card-title">
                     {address.address_type}
                 </h5>
-                <small className="card-text">Nama :{address.first_name} {address.last_name} </small>
-                <small className="card-text">phone:{address.phone} </small>
-                <small className="card-text">country:{address.country} </small>
-                <small className="card-text">city:{address.city} </small>
-                <small className="card-text">address_line_1:{address.address_line_1} </small>
-                <small className="card-text">address_line_2:{address.address_line_2} </small>
+                <p className="card-text">Nama :{address.first_name} {address.last_name} </p>
+                <p className="card-text">phone:{address.phone} </p>
+                <p className="card-text">country:{address.country} </p>
+                <p className="card-text">city:{address.city} </p>
+                <p className="card-text">address_line_1:{address.address_line_1} </p>
+                <p className="card-text">address_line_2:{address.address_line_2} </p>
             </div>
         </div>
     );
