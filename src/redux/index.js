@@ -1,10 +1,9 @@
 import { createStore, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-
 import rootReducer from "./reducers";
 
 // Actions
-import { checkForExpiredToken,fetchOrders, fetchProducts } from "./actions";
+import { checkForExpiredToken, fetchProducts } from "./actions";
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -15,6 +14,5 @@ const store = createStore(
 );
 store.dispatch(checkForExpiredToken());
 store.dispatch(fetchProducts());
-store.dispatch(fetchOrders());
 
 export default store;
