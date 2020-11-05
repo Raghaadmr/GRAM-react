@@ -4,6 +4,7 @@ import { SET_CURRENT_USER, SET_ERRORS } from "./actionTypes";
 import { resetErrors } from "./errors";
 import Cookies from "js-cookie";
 import { fetchProducts } from "./products";
+import { Redirect } from "react-router-dom";
 
 export const signup = (userData) => {
   return async (dispatch) => {
