@@ -26,10 +26,10 @@ export const login = (userData) => {
   return async (dispatch) => {
     try {
       const res = await instance.post("/login/", userData);
-      const { token } = res.data;
-      console.log(token);
+      const { access } = res.data;
+      console.log(access);
       dispatch(resetErrors());
-      dispatch(setCurrentUser(token));
+      dispatch(setCurrentUser(access));
       dispatch(fetchProducts());
     } catch (err) {
       dispatch({
