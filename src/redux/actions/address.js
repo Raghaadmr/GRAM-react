@@ -16,21 +16,3 @@ export const fetchAddresses = () => async (dispatch) => {
     }
   };
   
-//   //POST THE AUTHOR TO https://the-index-api.herokuapp.com/api/authors/
-//   export const postAuthor = (newAuthor, closeModal) => async (dispatch) => {
-//     try {
-//       const res = await instance.post("/api/authors/", newAuthor);
-//       const author = res.data;
-//       dispatch(resetErrors());
-//       dispatch({
-//         type: ADD_AUTHOR,
-//         payload: author,
-//       });
-//       closeModal();
-//     } catch (err) {
-//       dispatch({
-//         type: SET_ERRORS,
-//         payload: err.response.data,
-//       });
-//     }
-//   };
