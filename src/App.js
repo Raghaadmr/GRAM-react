@@ -11,6 +11,7 @@ import Signup from "./Signup";
 import NavBar from "./NavBar";
 import OrderList from "./Components/OrderList";
 import OrderDetail from "./Components/OrderDetail";
+import AddressList from "./Components/AddressList";
 
 
 function App() {
@@ -33,6 +34,9 @@ function App() {
         </Route>
         <Route path="/orders/">
           <OrderList />
+        </Route>
+        <Route path="/addresses">
+          <AddressList />
         </Route>
         <Redirect exact from="/logout" to="/login" />
         <Route path="/signup">

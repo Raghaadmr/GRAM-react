@@ -3,7 +3,7 @@ import instance from "./instance";
 import { SET_CURRENT_USER, SET_ERRORS } from "./actionTypes";
 import { resetErrors } from "./errors";
 import Cookies from "js-cookie";
-import { fetchProducts } from "./products";
+import { fetchAddresses, fetchOrders } from "../actions";
 
 export const signup = (userData) => {
   return async (dispatch) => {
@@ -12,7 +12,9 @@ export const signup = (userData) => {
       const { token } = res.data;
       dispatch(resetErrors());
       dispatch(setCurrentUser(token));
-      dispatch(fetchProducts());
+      // redundunt
+      // dispatch(fetchProducts());
+      //
     } catch (err) {
       dispatch({
         type: SET_ERRORS,
@@ -30,7 +32,9 @@ export const login = (userData) => {
       console.log(access);
       dispatch(resetErrors());
       dispatch(setCurrentUser(access));
-      dispatch(fetchProducts());
+      //redundunt
+      // dispatch(fetchProducts());
+      //
     } catch (err) {
       dispatch({
         type: SET_ERRORS,
@@ -43,21 +47,24 @@ export const login = (userData) => {
 const setAuthToken = (token) => {
   if (token) {
     Cookies.set("token", token);
-    instance.defaults.headers.Authorization = `jwt ${token}`;
+    instance.defaults.headers.Authorization = `Bearer ${token}`;
   } else {
     delete instance.defaults.headers.Authorization;
     Cookies.remove("token");
   }
 };
 
-const setCurrentUser = (token) => {
+const setCurrentUser = (token) => async dispatch => {
   setAuthToken(token);
   const user = token ? decode(token) : null;
-  return {
+  dispatch({ 
     type: SET_CURRENT_USER,
     payload: user,
-  };
+  });
+  dispatch(fetchAddresses());
+  dispatch(fetchOrders());
 };
+
 export const logout = () => setCurrentUser();
 
 export const checkForExpiredToken = () => {
