@@ -12,6 +12,7 @@ import NavBar from "./NavBar";
 import OrderList from "./Components/OrderList";
 import OrderDetail from "./Components/OrderDetail";
 import AddressList from "./Components/AddressList";
+import AddAddressForm from "./Components/AddAddressForm";
 
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
         </Route>
         <Route path="/addresses">
           <AddressList />
+        </Route>
+        <Route path="/add-address">
+          <AddAddressForm />
         </Route>
         <Redirect exact from="/logout" to="/login" />
         <Route path="/signup">
