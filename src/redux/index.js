@@ -13,8 +13,6 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 store.dispatch(checkForExpiredToken());
-// store.dispatch(fetchAddresses());
 store.dispatch(fetchProducts());
-// store.dispatch(fetchOrders());
 
 export default store;
