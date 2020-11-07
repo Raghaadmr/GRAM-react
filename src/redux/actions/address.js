@@ -37,6 +37,24 @@ export const fetchAddresses = () => async (dispatch) => {
     }
   };
 
+  export const deleteAddress = (addressID, history) => async (dispatch) => {
+    try {
+      await instance.delete(`address/${addressID}/delete/`);
+      dispatch(resetErrors());
+      // dispatch(fetchAddresses);
+      dispatch({
+        type: DELETE_ADDRESS,
+        payload: addressID,
+      });
+      history.push("/addresses")
+    } catch (err) {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
+    }
+  };
+
   export const fetchCountries = () => async (dispatch) => {
     try {
       const res = await instance.get("country/list/");
