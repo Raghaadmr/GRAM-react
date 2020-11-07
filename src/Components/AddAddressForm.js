@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addAddress } from "../redux/actions";
-import { Redirect } from "react-router-dom"
+import { Redirect, useHistory } from "react-router-dom"
 
 const AddAddressForm = (props) => {
   const [address, setAddress] = useState({
@@ -14,9 +14,13 @@ const AddAddressForm = (props) => {
     address_line_2: "",
   });
 
+  let history = useHistory()
+  const options = props.countries.map(country => 
+        <option value={country.id}>{country.name}</option>)
+
   const submitAddress = (event) => {
     event.preventDefault();
-    props.addAddress(address);
+    props.addAddress(address, history);
   };
 
   const textChangeHandler = (event) => {
@@ -50,7 +54,9 @@ const AddAddressForm = (props) => {
           <div className="input-group-prepend">
             <span className="input-group-text">Country</span>
           </div>
-          <input type="text" className="form-control" value={address.country} name="country"onChange={textChangeHandler} />
+          <select className="custom-select" name="country" onChange={textChangeHandler}>
+            {options}
+          </select>
         </div>
         <div className="input-group mb-3">
           <div className="input-group-prepend">
@@ -82,12 +88,12 @@ const AddAddressForm = (props) => {
   );
 };
 
-const mapStateToProps = ({ user }) => ({ user });
+const mapStateToProps = ({ user, countries }) => ({ user, countries });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addAddress: (newAddress) =>
-      dispatch(addAddress(newAddress)),
+    addAddress: (newAddress, history) =>
+      dispatch(addAddress(newAddress, history)),
   };
 };
 
