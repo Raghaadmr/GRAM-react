@@ -3,7 +3,8 @@ import {
     UPDATE_ADDRESS, 
     DELETE_ADDRESS, 
     ADD_ADDRESS,
-    SET_ERRORS
+    SET_ERRORS,
+    SET_COUNTRIES
     } from "./actionTypes"
 import { resetErrors } from "./errors";
 import instance from "./instance"
@@ -18,7 +19,7 @@ export const fetchAddresses = () => async (dispatch) => {
     }
   };
   
-  export const addAddress = (newAddress) => async (dispatch) => {
+  export const addAddress = (newAddress, history) => async (dispatch) => {
     try {
       const res = await instance.post("address/add/", newAddress);
       const address = res.data;
@@ -27,10 +28,21 @@ export const fetchAddresses = () => async (dispatch) => {
         type: ADD_ADDRESS,
         payload: address,
       });
+      history.push("/addresses")
     } catch (err) {
       dispatch({
         type: SET_ERRORS,
         payload: err.response.data,
       });
+    }
+  };
+
+  export const fetchCountries = () => async (dispatch) => {
+    try {
+      const res = await instance.get("country/list/");
+      const countries = res.data;
+      dispatch({ type: SET_COUNTRIES, payload: countries });
+    } catch (err) {
+      console.error(err);
     }
   };

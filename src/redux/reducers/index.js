@@ -4,6 +4,7 @@ import { combineReducers } from "redux";
 import errorsReducer from "./errors";
 import userReducer from "./user";
 import userAddress from "./address";
+import countriesList from "./countries"
 
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   errorMsg: errorsReducer,
   orders: ordersReducer,
   addresses: userAddress,
+  countries: countriesList,
 
 });
 
