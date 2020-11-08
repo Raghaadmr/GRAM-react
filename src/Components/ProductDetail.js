@@ -22,7 +22,7 @@ const ProductDetail = ({ products, addItem }) => {
   ));
 
   const textChangeHandler = (event) => {
-    setItem({...item, qty:event.target.value})
+    setItem({...item, qty: +event.target.value})
   }
 
   const handleClick = () => {
