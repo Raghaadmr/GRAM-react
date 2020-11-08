@@ -5,6 +5,7 @@ import errorsReducer from "./errors";
 import userReducer from "./user";
 import userAddress from "./address";
 import countriesList from "./countries"
+import userCart from "./cart"
 
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   orders: ordersReducer,
   addresses: userAddress,
   countries: countriesList,
+  cart: userCart,
 
 });
 

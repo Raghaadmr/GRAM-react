@@ -13,6 +13,7 @@ import OrderList from "./Components/OrderList";
 import OrderDetail from "./Components/OrderDetail";
 import AddressList from "./Components/AddressList";
 import AddAddressForm from "./Components/AddAddressForm";
+import CartList from "./Components/CartList";
 
 
 function App() {
@@ -41,6 +42,9 @@ function App() {
         </Route>
         <Route path="/add-address">
           <AddAddressForm />
+        </Route>
+        <Route path="/cart">
+          <CartList />
         </Route>
         <Redirect exact from="/logout" to="/login" />
         <Route path="/signup">
