@@ -21,7 +21,7 @@ const CheckoutPage = ({ addresses, user, orderCheckout, errorMsg, resetErrors, c
         items: items
     })
     const [selectedAddress, setSelectedAddress] = useState("")
-    // send one item from list to display in card 
+    // send one address from list to display in card 
     const addressCard = addresses.map(address => (
         <AddressCard key={address.id} address={address} 
         setSelectedAddress={setSelectedAddress} checkout={true}/>
@@ -61,8 +61,8 @@ const CheckoutPage = ({ addresses, user, orderCheckout, errorMsg, resetErrors, c
                 </div>
             </div>
             {selectedAddress? (
-                <Link to="/products">
-                <button className="btn btn-primary deactivate" onClick={placeOrder}>Place order</button>
+                <Link to="/orders">
+                <button className="btn btn-primary" onClick={placeOrder}>Place order</button>
                 </Link>
             ): 
             null} 

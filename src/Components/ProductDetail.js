@@ -4,14 +4,17 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addItem } from "../redux/actions";
 
-const ProductDetail = ({ products, addItem }) => {
+const ProductDetail = ({ products, addItem, cart }) => {
   const { productID } = useParams();
 
   const product = products.find((product) => product.id === +productID);
+  let cartProduct = cart.items.find(item => item.product.id === product?.id)
   const [item, setItem] = useState({
     product: product,
     qty: 1
   })
+  console.log(!cartProduct)
+  if(!cartProduct) cartProduct = {qty:0}
   if (!product) return <Redirect to="/products/" />;
 
   //display list of images product
@@ -46,7 +49,7 @@ const ProductDetail = ({ products, addItem }) => {
 
           <input type="text" className="" value={item.qty} name="qty" onChange={textChangeHandler} />
           {
-            item.qty <= product.stock && item.qty > 0 ? (
+            item.qty <= product.stock && item.qty > 0 && cartProduct.qty + item.qty <= product.stock? (
             <button className="btn btn-primary" onClick={handleClick}>Add to cart</button>
             ):
             null
@@ -56,8 +59,9 @@ const ProductDetail = ({ products, addItem }) => {
     </div>
   );
 };
-const mapStateToProps = ({ products }) => ({
+const mapStateToProps = ({ products, cart }) => ({
   products,
+  cart
 });
 
 const mapDispatchToProps = (dispatch) => {
