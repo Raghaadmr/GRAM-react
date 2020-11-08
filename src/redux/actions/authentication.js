@@ -5,7 +5,6 @@ import { resetErrors } from "./errors";
 import Cookies from "js-cookie";
 import { fetchAddresses, fetchOrders } from "../actions";
 
-
 export const signup = (userData) => {
   return async (dispatch) => {
     try {
@@ -27,7 +26,6 @@ export const login = (userData) => {
     try {
       const res = await instance.post("/login/", userData);
       const { access } = res.data;
-      console.log(access);
       dispatch(resetErrors());
       dispatch(setCurrentUser(access));
     } catch (err) {
@@ -49,10 +47,10 @@ const setAuthToken = (token) => {
   }
 };
 
-const setCurrentUser = (token) => async dispatch => {
+const setCurrentUser = (token) => async (dispatch) => {
   setAuthToken(token);
   const user = token ? decode(token) : null;
-  dispatch({ 
+  dispatch({
     type: SET_CURRENT_USER,
     payload: user,
   });

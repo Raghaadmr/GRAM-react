@@ -7,12 +7,10 @@ const SearchBar = ({ onChange }) => (
         className="form-control"
         type="text"
         placeholder="find classes.."
-        onChange={event => onChange(event.target.value)}
+        onChange={(event) => onChange(event.target.value)}
       />
       <div className="input-group-append">
-        <span className="input-group-text">
-          serach
-        </span>
+        <span className="input-group-text">search</span>
       </div>
     </div>
   </div>
