@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom"
 const AddressList = ({ addresses, user }) => {
     // send one item from list to display in card 
     const addressCard = addresses.map(address => (
-        <AddressCard key={address.id} address={address} />
+        <AddressCard key={address.id} address={address} checkout={false}/>
     ));
 
     if(!user) return <Redirect to="login/"/>

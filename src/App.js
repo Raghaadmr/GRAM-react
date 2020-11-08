@@ -13,12 +13,12 @@ import OrderList from "./Components/OrderList";
 import OrderDetail from "./Components/OrderDetail";
 import AddressList from "./Components/AddressList";
 import AddAddressForm from "./Components/AddAddressForm";
-
+import CartList from "./Components/CartList";
+import CheckoutPage from "./Components/CheckoutPage";
 
 function App() {
-  return (
-
-    <div>
+  return ( 
+  <div>
       <NavBar />
       <Switch>
         <Route path="/products/:productID">
@@ -41,6 +41,12 @@ function App() {
         </Route>
         <Route path="/add-address">
           <AddAddressForm />
+        </Route>
+        <Route path="/cart">
+          <CartList />
+        </Route>
+        <Route path="/checkout">
+          <CheckoutPage />
         </Route>
         <Redirect exact from="/logout" to="/login" />
         <Route path="/signup">

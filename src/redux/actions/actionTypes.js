@@ -18,4 +18,10 @@ export const UPDATE_ADDRESS = "UPDATE_ADDRESS"
 export const DELETE_ADDRESS = "DELETE_ADDRESS"
 export const SET_COUNTRIES = "SET_COUNTRIES"
 
+// Cart
+export const ADD_ITEM = "ADD_ITEM"
+export const REMOVE_ITEM = "REMOVE_ITEM"
+export const SET_CART = "SET_CART"
+
+
 

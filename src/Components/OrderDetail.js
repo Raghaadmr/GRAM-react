@@ -6,6 +6,7 @@ const OrderDetail = ({ orders }) => {
   const { orderID } = useParams();
   const order = orders.find((order) => order.id === +orderID);
 
+
   return (
     <div className="container" style={{ textAlign: "center" }}>
       <div className="mt-2 mb-2">
