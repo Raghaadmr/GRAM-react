@@ -20,6 +20,7 @@ const CartCard = ({ item, removeItem }) => {
                         name: {item.product.name}
                     </h5>
                     <small className="card-text">qty: {item.qty} </small>
+                    <small className="card-text">price: {item.product.price * item.qty} SAR</small>
                 </div>
             </Link>
             <button className="btn btn-primary" onClick={handleClick}>Delete</button>

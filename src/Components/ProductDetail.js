@@ -46,7 +46,7 @@ const ProductDetail = ({ products, addItem }) => {
 
           <input type="text" className="" value={item.qty} name="qty" onChange={textChangeHandler} />
           {
-            item.qty <= product.stock? (
+            item.qty <= product.stock && item.qty > 0 ? (
             <button className="btn btn-primary" onClick={handleClick}>Add to cart</button>
             ):
             null

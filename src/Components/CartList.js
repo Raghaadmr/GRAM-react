@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import CartCard from "./CartCard";
+import { Link } from "react-router-dom"
 
 const CartList = ({ cart }) => {
     const cartCards = cart.items.map(item => (
@@ -21,7 +22,10 @@ const CartList = ({ cart }) => {
                         <p>subtotal: {cart.subtotal}</p>
                         <p>tax: {cart.tax}</p>
                         <p>total: {cart.total}</p>
+                        <Link to="/checkout">
                         <button className="btn btn-success">Proceed to checkout</button>
+                        </Link>
+                        
                     </div>    
                 ):(
                     <p>Cart is empty</p>

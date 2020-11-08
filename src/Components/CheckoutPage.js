@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import AddressCard from "./AddressCard";
-import { Redirect } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import { checkout, resetErrors } from "../redux/actions"
 
-const CheckoutPage = ({ addresses, user, orderCheckout, errorMsg, resetErrors }) => {
-    // remaining access cart and set items
-    const items = [ {product:1, qty:4}, {product:2, qty:4}, {product:3, qty:5} ]
+const CheckoutPage = ({ addresses, user, orderCheckout, errorMsg, resetErrors, cart }) => {
+    // create list of items with specific structure
+    const items = cart.items.map(item => ({product: item.product.id, qty: item.qty}))
+
     useEffect(() => {
         return () => {
           if (errorMsg.length) resetErrors();
@@ -14,8 +15,8 @@ const CheckoutPage = ({ addresses, user, orderCheckout, errorMsg, resetErrors })
       }, []);
     
     const [order, setOrder] = useState({
-        total: 0,
-        tax: 0,
+        total: cart.total,
+        tax: cart.tax,
         address: "",
         items: items
     })
@@ -29,13 +30,11 @@ const CheckoutPage = ({ addresses, user, orderCheckout, errorMsg, resetErrors })
     const placeOrder = () => {
         const newOrder = {...order, address:selectedAddress.id}
         setOrder(newOrder)
-        console.log(newOrder)
         orderCheckout(newOrder)
 
     }
-    console.log(errorMsg[0])
-
-    if(!user) return <Redirect to="login/"/>
+    if(!user) return <Redirect to="/login"/>
+    if(!cart.items.length) return <Redirect to="/cart"/>
 
     return (
         <div className="container" style={{ textAlign: "center" }}>
@@ -62,17 +61,20 @@ const CheckoutPage = ({ addresses, user, orderCheckout, errorMsg, resetErrors })
                 </div>
             </div>
             {selectedAddress? (
-            <button className="btn btn-primary deactivate" onClick={placeOrder}>Place order</button>
+                <Link to="/products">
+                <button className="btn btn-primary deactivate" onClick={placeOrder}>Place order</button>
+                </Link>
             ): 
             null} 
             
         </div>
     );
 }
-const mapStateToProps = ({ addresses, user, errorMsg }) => ({
+const mapStateToProps = ({ addresses, user, errorMsg, cart }) => ({
     addresses,
     user,
-    errorMsg
+    errorMsg,
+    cart
 });
 
 const mapDispatchToProps = (dispatch) => {

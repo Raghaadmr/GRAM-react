@@ -1,12 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, useParams } from "react-router";
-// import OrderCard from "./OrderCard";
 
 const OrderDetail = ({ orders }) => {
     const { orderID } = useParams();
     const order = orders.find((order) => order.id === +orderID);
-    // if (!order) return <Redirect to="/list/" />;
 
     return (
         <div className="container" style={{ textAlign: "center" }}>

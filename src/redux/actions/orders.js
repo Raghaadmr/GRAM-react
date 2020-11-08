@@ -1,4 +1,6 @@
 import { SET_ORDERS, SET_ERRORS } from "./actionTypes";
+import Cookies from "js-cookie";
+import { setCart } from "./cart"
 
 import instance from "./instance";
 export const fetchOrders = () => async dispatch => {
@@ -18,8 +20,10 @@ export const checkout = (orderData) => async dispatch => {
     try{
         const res = await instance.post("order/checkout/", orderData)
         const order = res.data
-        console.log("Your new order is ",order)
         dispatch(fetchOrders())
+        Cookies.remove("cart")
+        dispatch(setCart())
+
         
     } catch (error){
         dispatch({

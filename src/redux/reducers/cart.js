@@ -16,9 +16,9 @@ const reducer = (state = initialState, action) => {
                 myCart = JSON.parse(myCart)
                 return myCart
             }
-            return state
+            return initialState
         case ADD_ITEM:
-            // check for item
+            // check for exixting item to update qty only or add new item
             let items
             const existingItem = state.items.find(item => item.product.id === action.payload.product.id)
             if(existingItem){
