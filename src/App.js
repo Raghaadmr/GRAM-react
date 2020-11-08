@@ -13,7 +13,12 @@ import OrderList from "./Components/OrderList";
 import OrderDetail from "./Components/OrderDetail";
 import AddressList from "./Components/AddressList";
 import AddAddressForm from "./Components/AddAddressForm";
+<<<<<<< HEAD
 import CartList from "./Components/CartList";
+=======
+import CheckoutPage from "./Components/CheckoutPage";
+
+>>>>>>> e4fb474... complete checkout just need to connect with cart and user can select the country from a list
 
 
 function App() {
@@ -43,8 +48,13 @@ function App() {
         <Route path="/add-address">
           <AddAddressForm />
         </Route>
+<<<<<<< HEAD
         <Route path="/cart">
           <CartList />
+=======
+        <Route path="/checkout">
+          <CheckoutPage />
+>>>>>>> e4fb474... complete checkout just need to connect with cart and user can select the country from a list
         </Route>
         <Redirect exact from="/logout" to="/login" />
         <Route path="/signup">

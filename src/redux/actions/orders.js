@@ -1,4 +1,4 @@
-import { SET_ORDERS } from "./actionTypes";
+import { SET_ORDERS, SET_ERRORS } from "./actionTypes";
 
 import instance from "./instance";
 export const fetchOrders = () => async dispatch => {
@@ -16,12 +16,15 @@ export const fetchOrders = () => async dispatch => {
 
 export const checkout = (orderData) => async dispatch => {
     try{
-        const res = await instance.post("orders/checkout/", orderData)
+        const res = await instance.post("order/checkout/", orderData)
         const order = res.data
         console.log("Your new order is ",order)
-        // dispatch(fetchOrders())
+        dispatch(fetchOrders())
         
     } catch (error){
-        console.error(error);
+        dispatch({
+            type: SET_ERRORS,
+            payload: error.response.data,
+          });
     }
 }

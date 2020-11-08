@@ -27,11 +27,15 @@ const AddressCard = ({ address, checkout, setSelectedAddress }) => {
                 <p className="card-text">address_line_1:{address.address_line_1} </p>
                 <p className="card-text">address_line_2:{address.address_line_2} </p>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <button className="btn btn-primary">Update</button>
                 <button className="btn btn-danger" onClick={() => deleteAddress(address.id, history)}>Delete</button>
 =======
                 {checkout?(<button onClick={handleClick}>Choose as delivery address</button>):null}    
 >>>>>>> eb83f5e... not tested checkout without place order button
+=======
+                {checkout?(<button className="btn btn-primary" onClick={handleClick}>Choose as delivery address</button>):null}    
+>>>>>>> e4fb474... complete checkout just need to connect with cart and user can select the country from a list
             </div>
         </div>
     );

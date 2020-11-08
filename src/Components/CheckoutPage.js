@@ -1,28 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import AddressCard from "./AddressCard";
 import { Redirect } from "react-router-dom"
+import { checkout, resetErrors } from "../redux/actions"
 
-const CheckoutPage = ({ addresses, user }) => {
-    // remaining placeorder button and send the data to server
+const CheckoutPage = ({ addresses, user, orderCheckout, errorMsg, resetErrors }) => {
+    // remaining access cart and set items
+    const items = [ {product:1, qty:4}, {product:2, qty:4}, {product:3, qty:5} ]
+    useEffect(() => {
+        return () => {
+          if (errorMsg.length) resetErrors();
+        };
+      }, []);
+    
     const [order, setOrder] = useState({
         total: 0,
         tax: 0,
         address: "",
-        items: []
+        items: items
     })
-    const [selectedAddress, setSelectedAddress] = useState({})
+    const [selectedAddress, setSelectedAddress] = useState("")
     // send one item from list to display in card 
     const addressCard = addresses.map(address => (
         <AddressCard key={address.id} address={address} 
         setSelectedAddress={setSelectedAddress} checkout={true}/>
     ));
 
+    const placeOrder = () => {
+        const newOrder = {...order, address:selectedAddress.id}
+        setOrder(newOrder)
+        console.log(newOrder)
+        orderCheckout(newOrder)
+
+    }
+    console.log(errorMsg[0])
+
     if(!user) return <Redirect to="login/"/>
 
     return (
         <div className="container" style={{ textAlign: "center" }}>
-            <div className="mt-2 mb-2">
+            <div className="mt-2 mb-2 row">
                 <div className="col-lg-10">
                 <h3> Choose your delivery address</h3>
                 <div className="row">
@@ -43,13 +60,26 @@ const CheckoutPage = ({ addresses, user }) => {
                         <p className="card-text">Total:{order.total + order.tax} </p>  
                     </div>
                 </div>
-            </div> 
+            </div>
+            {selectedAddress? (
+            <button className="btn btn-primary deactivate" onClick={placeOrder}>Place order</button>
+            ): 
+            null} 
+            
         </div>
     );
 }
-const mapStateToProps = ({ addresses, user }) => ({
+const mapStateToProps = ({ addresses, user, errorMsg }) => ({
     addresses,
-    user
+    user,
+    errorMsg
 });
 
-export default connect(mapStateToProps)(CheckoutPage);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        orderCheckout: (newOrder) => dispatch(checkout(newOrder)),
+        resetErrors: () => dispatch(resetErrors()),
+    };
+  };
+
+export default connect(mapStateToProps,mapDispatchToProps)(CheckoutPage);
